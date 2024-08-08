@@ -11,6 +11,16 @@ use App\Interfaces\AppointmentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @OA\Info(
+ *      title="API Appointment Swagger",
+ *      version="1.0",
+ *      description="API CRUD Appointment"
+ * )
+ *
+ * @OA\Server(url="http://localhost:8000")
+ */
+
 class AppointmentController extends Controller
 {
     private AppointmentRepositoryInterface $appointmentRepositoryInterface;
@@ -20,18 +30,75 @@ class AppointmentController extends Controller
         $this->appointmentRepositoryInterface = $appointmentRepositoryInterface;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/appointments",
+     *     tags={"Appointments"},
+     *     summary="Get list of appointments",
+     *     description="Return list of appointments",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Succesful operation",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/AppointmentResource")
+     *         )
+     *      )
+     * )
+     */
     public function index()
     {
         $data = $this->appointmentRepositoryInterface->getAll();
         return ApiResponseHelper::sendResponse(AppointmentResource::collection($data), '', 200);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/appointments/{id}",
+     *     tags={"Appointments"},
+     *     summary="Get appointments information",
+     *     description="Get appointment details by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/AppointmentResource")
+     *     )
+     * )
+     */
     public function show($id)
     {
         $student = $this->appointmentRepositoryInterface->getById($id);
         return ApiResponseHelper::sendResponse(new AppointmentResource($student), '', 200);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/appointments",
+     *     tags={"Appointments"},
+     *     summary="Create new appointment",
+     *     description="Create a new appointment record",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="patient_name", type="string", example="John Doe"),
+     *             @OA\Property(property="doctor_name", type="string", example="Sam Jame"),
+     *             @OA\Property(property="appointment_date", type="datetime", example="2024-08-05 07:30:00"),
+     *             @OA\Property(property="status", type="string", example="scheduled")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Record created successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/AppointmentResource")
+     *     )
+     * )
+    */
     public function store(StoreAppointmentRequest $request)
     {
         $data = [
@@ -51,6 +118,34 @@ class AppointmentController extends Controller
         }
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/appointments/{id}",
+     *     tags={"Appointments"},
+     *     summary="Update appointment information",
+     *     description="Update appointment record by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="patient_name", type="string", example="John Doe"),
+     *             @OA\Property(property="doctor_name", type="string", example="Sam Jame"),
+     *             @OA\Property(property="appointment_date", type="datetime", example="2024-08-05 07:30:00"),
+     *             @OA\Property(property="status", type="string", example="scheduled")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Record updated successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/AppointmentResource")
+     *     )
+     * )
+     */
     public function update(UpdateAppointmentRequest $request, string $id)
     {
         $student = $this->appointmentRepositoryInterface->getById($id);
@@ -76,6 +171,24 @@ class AppointmentController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/appointments/{id}",
+     *     tags={"Appointments"},
+     *     summary="Delete appointment record",
+     *     description="Delete appointment by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Record deleted successfully"
+     *     )
+     * )
+     */
     public function destroy(string $id)
     {
         $this->appointmentRepositoryInterface->delete($id);

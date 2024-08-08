@@ -1,0 +1,239 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Appointment Swagger",
+        "description": "API CRUD Appointment",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/appointments": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get list of appointments",
+                "description": "Return list of appointments",
+                "operationId": "ecb062880b838a57a5694142076e25d7",
+                "responses": {
+                    "200": {
+                        "description": "Succesful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AppointmentResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Create new appointment",
+                "description": "Create a new appointment record",
+                "operationId": "3d4e4e0f4f0eeecaf5543922e660e040",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "patient_name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "doctor_name": {
+                                        "type": "string",
+                                        "example": "Sam Jame"
+                                    },
+                                    "appointment_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-08-05 07:30:00"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "scheduled"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Record created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/appointments/{id}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get appointments information",
+                "description": "Get appointment details by ID",
+                "operationId": "b4aca14913aee5e1711ac12a5a220878",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Update appointment information",
+                "description": "Update appointment record by ID",
+                "operationId": "688c8262fef66ea5897fe06f953fb83e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "patient_name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "doctor_name": {
+                                        "type": "string",
+                                        "example": "Sam Jame"
+                                    },
+                                    "appointment_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-08-05 07:30:00"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "scheduled"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Record updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppointmentResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Delete appointment record",
+                "description": "Delete appointment by ID",
+                "operationId": "5b03da07ed3e53b8b6249317f46f8cfd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Record deleted successfully"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AppointmentResource": {
+                "properties": {
+                    "id": {
+                        "description": "Id of the Appointment",
+                        "type": "integer"
+                    },
+                    "patient_name": {
+                        "description": "patient name of the Appointment",
+                        "type": "string"
+                    },
+                    "doctor_name": {
+                        "description": "doctor name of the Appointment",
+                        "type": "string"
+                    },
+                    "appointment_date": {
+                        "description": "dateof the  Appointment",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "description": "status the  Appointment",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Appointments",
+            "description": "Appointments"
+        }
+    ]
+}

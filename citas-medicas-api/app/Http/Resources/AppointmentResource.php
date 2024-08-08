@@ -8,10 +8,36 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class AppointmentResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
+     * @OA\Schema(
+     *     schema="AppointmentResource",
+     *     type="object",
+     *     @OA\Property(
+     *         property="id",
+     *         type="integer",
+     *         description="Id of the Appointment"
+     *     ),
+     * *   @OA\Property(
+     *         property="patient_name",
+     *         type="string",
+     *         description="patient name of the Appointment"
+     *     ),
+     * *   @OA\Property(
+     *         property="doctor_name",
+     *         type="string",
+     *         description="doctor name of the Appointment"
+     *     ),
+     * *   @OA\Property(
+     *         property="appointment_date",
+     *         type="datetime",
+     *         description="dateof the  Appointment"
+     *     ),
+     * *   @OA\Property(
+     *         property="status",
+     *         type="string",
+     *         description="status the  Appointment"
+     *     )
+     * )
+    */
     public function toArray(Request $request): array
     {
         return[
