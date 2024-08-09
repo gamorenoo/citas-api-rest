@@ -223,6 +223,133 @@
                     }
                 ]
             }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register user",
+                "description": "register a new user",
+                "operationId": "76a1cbaea48a581595406d4dd685cc2c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Gustavo Moreno"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "gustavoamoreno@outlook.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "****"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Succesful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AuthResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "description": "Authenticate user and return token",
+                "operationId": "dcf90ce65219b0ad51fc32e9f7f69843",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "gustavoamoreno@outlook.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "****"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "Bearer token_here"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/AuthResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "description": "Logout session user",
+                "operationId": "edf2b3b2f5fefa33e2fd224d2f2505c4",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -252,6 +379,23 @@
                     }
                 },
                 "type": "object"
+            },
+            "AuthResource": {
+                "properties": {
+                    "name": {
+                        "description": "name user",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "email user",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "password user",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -268,6 +412,10 @@
         {
             "name": "Appointments",
             "description": "Appointments"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
         }
     ],
     "security": {

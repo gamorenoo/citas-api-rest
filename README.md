@@ -61,7 +61,5 @@ Cancelación de Citas: Permite a los usuarios cancelar citas de forma eficiente,
 **Endpoint:**
 Se puede usar desde un navegador web Postman, Insomina o cualquier otra herramienta para probar servicios Rest
    bash
-   Login de usuario POST http://127.0.0.1:8000/api/login
-   Registro de usuarios POST http://127.0.0.1:8000/api/register
    Url documentacion http://127.0.0.1:8000/api/documentation
    

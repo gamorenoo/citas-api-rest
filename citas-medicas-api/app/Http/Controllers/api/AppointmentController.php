@@ -12,14 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @OA\Info(
- *      title="API Appointment Swagger",
- *      version="1.0",
- *      description="API CRUD Appointment"
- * )
- *
- * @OA\Server(url="http://localhost:8000")
- * 
  * @OA\SecurityScheme(
  *     type="http",
  *     description="Login with email and password to get the authentication token",
