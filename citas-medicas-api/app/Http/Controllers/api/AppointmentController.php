@@ -19,6 +19,15 @@ use Illuminate\Support\Facades\DB;
  * )
  *
  * @OA\Server(url="http://localhost:8000")
+ * 
+ * @OA\SecurityScheme(
+ *     type="http",
+ *     description="Login with email and password to get the authentication token",
+ *     name="Token based Based",
+ *     in="header",
+ *     scheme="bearer",
+ *     securityScheme="bearerAuth",
+ * )
  */
 
 class AppointmentController extends Controller
@@ -43,7 +52,8 @@ class AppointmentController extends Controller
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/AppointmentResource")
      *         )
-     *      )
+     *      ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function index()
@@ -68,7 +78,8 @@ class AppointmentController extends Controller
      *         response=200,
      *         description="Successful operation",
      *         @OA\JsonContent(ref="#/components/schemas/AppointmentResource")
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function show($id)
@@ -96,7 +107,8 @@ class AppointmentController extends Controller
      *         response=201,
      *         description="Record created successfully",
      *         @OA\JsonContent(ref="#/components/schemas/AppointmentResource")
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
     */
     public function store(StoreAppointmentRequest $request)
@@ -143,7 +155,8 @@ class AppointmentController extends Controller
      *         response=200,
      *         description="Record updated successfully",
      *         @OA\JsonContent(ref="#/components/schemas/AppointmentResource")
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function update(UpdateAppointmentRequest $request, string $id)
@@ -186,7 +199,8 @@ class AppointmentController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Record deleted successfully"
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(string $id)

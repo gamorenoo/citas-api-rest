@@ -36,7 +36,7 @@ Cancelación de Citas: Permite a los usuarios cancelar citas de forma eficiente,
 - *Autenticación:* Soporte para autenticación con tokens utilizando Laravel Sanctum o Passport.
 - *Migraciones de Datos:* Administradas con las poderosas herramientas de migración de Laravel.
 - *Estructura Escalable:* Sistema modular que facilita la extensión y mantenimiento.
-- *Swagger:* Para documentacion del api
+- *Swagger:* Para documentacion del api y para ejecutar los metodos desde un navegador web
 
 ## Requisitos del Sistema
 
@@ -59,7 +59,9 @@ Cancelación de Citas: Permite a los usuarios cancelar citas de forma eficiente,
 
 ## Uso
 **Endpoint:**
-se puede usar Postman, Insomina o cualquier otra herramienta para probar servicios Rest
+Se puede usar desde un navegador web Postman, Insomina o cualquier otra herramienta para probar servicios Rest
    bash
    Login de usuario POST http://127.0.0.1:8000/api/login
    Registro de usuarios POST http://127.0.0.1:8000/api/register
+   Url documentacion http://127.0.0.1:8000/api/documentation
+   
