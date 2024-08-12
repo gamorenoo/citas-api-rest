@@ -62,5 +62,5 @@ Cancelación de Citas: Permite a los usuarios cancelar citas de forma eficiente,
 Se puede usar desde un navegador web Postman, Insomina o cualquier otra herramienta para probar servicios Rest
    Url documentacion http://127.0.0.1:8000/api/documentation
    Tener en cuenta que si la BD está vacía entonces se debe crear un usuario con Auth/register y posteriormente generar las sesión con Auth/login
-   tomar el token devuelto y colcoarlo en el autorizer de Suagger para ejecutar los metodos del controlador Appointments
+   tomar el token devuelto y colcoarlo en el autorizer de Swagger para ejecutar los metodos del controlador Appointments
    
