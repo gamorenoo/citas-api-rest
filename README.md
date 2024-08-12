@@ -50,10 +50,10 @@ Cancelación de Citas: Permite a los usuarios cancelar citas de forma eficiente,
 1. *Clona el repositorio:*
 
    bash
-   git clone https://github.com/gamorenoo/citas-api-rest.git
-   cd citas-api-rest
-   composer install
-   php artisan migrate
+   - git clone https://github.com/gamorenoo/citas-api-rest.git
+   - cd citas-api-rest
+   - composer install
+   - php artisan migrate
 ## Ejecucion de aplicacion
   php artisan serve
 
